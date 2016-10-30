@@ -29,7 +29,8 @@ public class ContactDAOImpl implements ContactDAO {
     }
 
     public void save(Contact contact) {
-        sessionFactory.getCurrentSession().save(contact);
+        sessionFactory.openSession().saveOrUpdate(contact);
+        logger.info("Contact saved with id: "+ contact.getId());
     }
 
     @SuppressWarnings("unchecked")

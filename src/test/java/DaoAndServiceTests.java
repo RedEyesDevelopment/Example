@@ -6,6 +6,7 @@ import springtestapp.model.ContactTelDetail;
 import springtestapp.model.Hobby;
 import springtestapp.service.ContactService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,7 +16,6 @@ public class DaoAndServiceTests {
     @Test
     @SuppressWarnings("resource")
     public void TestFindAllWithDetail(){
-//        ApplicationContext appContext = new AnnotationConfigApplicationContext(DaoServiceTestConfig.class);
         ApplicationContext appContext = new ClassPathXmlApplicationContext("DaoServiceTestResources/test-spring-root-context.xml");
         ContactService service = (ContactService) appContext.getBean("contactService");
         List<Contact> resultset = service.findAllWithDetail();
@@ -39,7 +39,6 @@ public class DaoAndServiceTests {
     @Test
     @SuppressWarnings("resource")
     public void TestFindById() {
-//        ApplicationContext appContext = new AnnotationConfigApplicationContext(DaoServiceTestConfig.class);
         ApplicationContext appContext = new ClassPathXmlApplicationContext("DaoServiceTestResources/test-spring-root-context.xml");
         ContactService service = (ContactService) appContext.getBean("contactService");
         Long searchableId=1L;
@@ -57,5 +56,23 @@ public class DaoAndServiceTests {
                 System.out.println(hobby);
             }
         }
+    }
+
+    @Test
+    @SuppressWarnings("resource")
+    public void TestSaveContact() {
+        ApplicationContext appContext = new ClassPathXmlApplicationContext("DaoServiceTestResources/test-spring-root-context.xml");
+        ContactService service = (ContactService) appContext.getBean("contactService");
+
+        Contact contact = new Contact();
+        contact.setFirstName("Michael");
+        contact.setLastName("Jackson");
+        contact.setBirthDate(new Date());
+        ContactTelDetail contactTelDetail = new ContactTelDetail("Home", "11111111");
+        contact.addContactTelDetail(contactTelDetail);
+        contactTelDetail=new ContactTelDetail("Mobile", "22222222");
+        contact.addContactTelDetail(contactTelDetail);
+
+        service.save(contact);
     }
 }
