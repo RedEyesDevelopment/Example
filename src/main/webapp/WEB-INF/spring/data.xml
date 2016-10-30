@@ -12,6 +12,7 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
+
     <!-- Настраивает управление транзакциями с помощью аннотации @Transactional -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 

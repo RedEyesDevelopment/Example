@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import springtestapp.model.Contact;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class ContactDAOImpl implements ContactDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Resource(name = "sessionFactory")
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
@@ -35,8 +37,9 @@ public class ContactDAOImpl implements ContactDAO {
         return sessionFactory.getCurrentSession().createQuery("from Contact c").list();
     }
 
+    @SuppressWarnings("unchecked")
     public List<Contact> findAllWithDetail() {
-        return null;
+        return sessionFactory.openSession().getNamedQuery("Contact.findAllWithDetail").list();
     }
 
     public void delete(Long id) {

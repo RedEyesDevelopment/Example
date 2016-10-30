@@ -30,9 +30,9 @@ public class ContactServiceImpl implements ContactService {
         return contactDAO.findAll();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Contact> findAllWithDetail() {
-        return null;
+        return contactDAO.findAllWithDetail();
     }
 
     @Transactional
