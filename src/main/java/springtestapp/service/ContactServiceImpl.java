@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import springtestapp.dao.PlaceDAO;
+import springtestapp.dao.ContactDAO;
 import springtestapp.model.Place;
 
 import java.util.List;
@@ -14,30 +14,30 @@ import java.util.List;
  * Created by Gvozd on 26.03.2016.
  */
 @Service
-public class PlaceServiceImpl implements PlaceService {
-    final Log logger = LogFactory.getLog(getClass());
+public class ContactServiceImpl implements ContactService {
+    private final static Log logger = LogFactory.getLog(ContactServiceImpl.class);
 
     @Autowired
-    private PlaceDAO placeDAO;
+    private ContactDAO contactDAO;
 
     @Transactional
     public void addPlace(Place place) {
-        placeDAO.addPlace(place);
+        contactDAO.addPlace(place);
     }
 
     @Transactional
     public List<Place> listPlace() {
-        return placeDAO.listPlace();
+        return contactDAO.listPlace();
     }
 
     @Transactional
     public void removePlace(Integer id) {
-        placeDAO.removePlace(id);
+        contactDAO.removePlace(id);
     }
 
     @Transactional
     public Place getPlace(Integer id) {
         logger.info("service impl - place traded to controller!");
-        return placeDAO.getPlace(id);
+        return contactDAO.getPlace(id);
     }
 }

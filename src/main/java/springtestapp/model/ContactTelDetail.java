@@ -61,6 +61,8 @@ public class ContactTelDetail implements Serializable {
         this.telNumber = telNumber;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "CONTACT_ID")
     public Contact getContact() {
         return contact;
     }

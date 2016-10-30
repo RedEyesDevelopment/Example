@@ -1,4 +1,4 @@
-package springtestapp.dao;
+package springtestapp.service;
 
 import springtestapp.model.Place;
 
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Gvozd on 26.03.2016.
  */
-public interface PlaceDAO {
+public interface ContactService {
 
     public void addPlace(Place place);
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import springtestapp.model.Place;
-import springtestapp.service.PlaceService;
+import springtestapp.service.ContactService;
 
 import java.util.Map;
 
@@ -27,11 +27,11 @@ public class MainController {
     }
 
     @Autowired
-    private PlaceService placeService;
+    private ContactService contactService;
 
     @RequestMapping("/list")
     public String listPlaces(Map<String, Object> map) {
-        map.put("placeList", placeService.listPlace());
+        map.put("placeList", contactService.listPlace());
 
         return "places";
     }
@@ -61,14 +61,14 @@ public class MainController {
     public String addingPlace(@ModelAttribute("place") Place place,
                               BindingResult result) {
 
-        placeService.addPlace(place);
+        contactService.addPlace(place);
 
         return "redirect:/list";
     }
 
     @RequestMapping(value = "/select/{placeId}")
     public String selectPlace(@PathVariable("placeId") Integer placeId, Map<String, Object> map) {
-        Place place = placeService.getPlace(placeId);
+        Place place = contactService.getPlace(placeId);
         logger.info(place.getPlacename() + " in maincontroller - loaded!");
         map.put("searchable", place);
         return "place";
@@ -77,7 +77,7 @@ public class MainController {
     @RequestMapping("/delete/{placeId}")
     public String deletePlace(@PathVariable("placeId") Integer placeId) {
 
-        placeService.removePlace(placeId);
+        contactService.removePlace(placeId);
 
         return "redirect:/list";
     }
