@@ -17,5 +17,5 @@ public interface ContactDAO {
 
     public Contact findById(Long id);
 
-    public void delete(Integer id);
+    public void delete(Long id);
 }

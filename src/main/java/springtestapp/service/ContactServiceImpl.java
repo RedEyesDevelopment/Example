@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import springtestapp.dao.ContactDAO;
-import springtestapp.model.Place;
+import springtestapp.model.Contact;
 
 import java.util.List;
 
@@ -21,23 +21,28 @@ public class ContactServiceImpl implements ContactService {
     private ContactDAO contactDAO;
 
     @Transactional
-    public void addPlace(Place place) {
-        contactDAO.addPlace(place);
+    public void save(Contact contact) {
+        contactDAO.save(contact);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Contact> findAll() {
+        return contactDAO.findAll();
     }
 
     @Transactional
-    public List<Place> listPlace() {
-        return contactDAO.listPlace();
+    public List<Contact> findAllWithDetail() {
+        return null;
     }
 
     @Transactional
-    public void removePlace(Integer id) {
-        contactDAO.removePlace(id);
+    public void delete(Long id) {
+        contactDAO.delete(id);
     }
 
     @Transactional
-    public Place getPlace(Integer id) {
+    public Contact findById(Long id) {
         logger.info("service impl - place traded to controller!");
-        return contactDAO.getPlace(id);
+        return contactDAO.findById(id);
     }
 }

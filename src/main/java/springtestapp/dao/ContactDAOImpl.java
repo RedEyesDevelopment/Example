@@ -12,12 +12,16 @@ import java.util.List;
 /**
  * Created by Gvozd on 26.03.2016.
  */
-@Repository("contactDAO")
+@Repository
 public class ContactDAOImpl implements ContactDAO {
     private final static Log logger = LogFactory.getLog(ContactDAOImpl.class);
 
     @Autowired
     private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     public ContactDAOImpl() {
     }
@@ -26,20 +30,16 @@ public class ContactDAOImpl implements ContactDAO {
         sessionFactory.getCurrentSession().save(contact);
     }
 
+    @SuppressWarnings("unchecked")
     public List<Contact> findAll() {
-        return null;
+        return sessionFactory.getCurrentSession().createQuery("from Contact c").list();
     }
 
     public List<Contact> findAllWithDetail() {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
-    public List<Contact> listContact() {
-        return sessionFactory.getCurrentSession().createQuery("from Contact").list();
-    }
-
-    public void delete(Integer id) {
+    public void delete(Long id) {
         Contact contact = (Contact) sessionFactory.getCurrentSession().load(
                 Contact.class, id);
         if (null != contact) {
@@ -54,7 +54,6 @@ public class ContactDAOImpl implements ContactDAO {
         } catch (Exception e) {
             resultcontact = null;
         }
-        logger.info(resultcontact.getContactname() + " in DAO - loaded!");
         return resultcontact;
     }
 }

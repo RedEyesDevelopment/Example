@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import springtestapp.model.Place;
 import springtestapp.service.ContactService;
 
 import java.util.Map;
@@ -61,7 +60,7 @@ public class MainController {
     public String addingPlace(@ModelAttribute("place") Place place,
                               BindingResult result) {
 
-        contactService.addPlace(place);
+        contactService.addContact(place);
 
         return "redirect:/list";
     }

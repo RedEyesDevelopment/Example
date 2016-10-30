@@ -1,6 +1,6 @@
 package springtestapp.service;
 
-import springtestapp.model.Place;
+import springtestapp.model.Contact;
 
 import java.util.List;
 
@@ -9,11 +9,13 @@ import java.util.List;
  */
 public interface ContactService {
 
-    public void addPlace(Place place);
+    public void save(Contact contact);
 
-    public List<Place> listPlace();
+    public List<Contact> findAll();
 
-    public void removePlace(Integer id);
+    public List<Contact> findAllWithDetail();
 
-    public Place getPlace(Integer id);
+    public Contact findById(Long id);
+
+    public void delete(Long id);
 }
