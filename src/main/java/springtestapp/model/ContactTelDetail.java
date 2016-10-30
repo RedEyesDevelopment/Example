@@ -81,4 +81,27 @@ public class ContactTelDetail implements Serializable {
                 ", contact=" + contact +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactTelDetail that = (ContactTelDetail) o;
+
+        if (getVersion() != that.getVersion()) return false;
+        if (!getId().equals(that.getId())) return false;
+        if (getTelType() != null ? !getTelType().equals(that.getTelType()) : that.getTelType() != null) return false;
+        return getTelNumber() != null ? getTelNumber().equals(that.getTelNumber()) : that.getTelNumber() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getVersion();
+        result = 31 * result + (getTelType() != null ? getTelType().hashCode() : 0);
+        result = 31 * result + (getTelNumber() != null ? getTelNumber().hashCode() : 0);
+        return result;
+    }
 }

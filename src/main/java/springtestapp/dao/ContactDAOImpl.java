@@ -2,6 +2,7 @@ package springtestapp.dao;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.FlushMode;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,10 @@ public class ContactDAOImpl implements ContactDAO {
     @Resource(name = "sessionFactory")
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 
     public ContactDAOImpl() {
@@ -51,7 +56,13 @@ public class ContactDAOImpl implements ContactDAO {
         }
     }
 
-    @SuppressWarnings("unchecked")   
+    public void update(Contact contact) {
+        sessionFactory.getCurrentSession().setFlushMode(FlushMode.COMMIT);
+        sessionFactory.getCurrentSession().setDefaultReadOnly(false);
+        sessionFactory.getCurrentSession().update(contact);
+    }
+
+    @SuppressWarnings("unchecked")
     public Contact findById(Long id) {
         return (Contact) sessionFactory.openSession().getNamedQuery("Contact.findById").setParameter("id", id).uniqueResult();
     }

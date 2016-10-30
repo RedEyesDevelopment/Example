@@ -1,5 +1,6 @@
 package springtestapp.dao;
 
+import org.hibernate.SessionFactory;
 import springtestapp.model.Contact;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface ContactDAO {
     public Contact findById(Long id);
 
     public void delete(Long id);
+
+    public void update(Contact contact);
+
+    public SessionFactory getSessionFactory();
 }

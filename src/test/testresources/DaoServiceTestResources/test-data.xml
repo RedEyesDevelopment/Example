@@ -45,7 +45,7 @@
 
     <!-- Настройки фабрики сессий Хибернейта -->
     <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" scope="prototype">
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation">
             <value>classpath:/DaoServiceTestResources/test-hibernate.cfg.xml</value>

@@ -1,5 +1,6 @@
 package springtestapp.service;
 
+import org.hibernate.SessionFactory;
 import springtestapp.model.Contact;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface ContactService {
     public Contact findById(Long id);
 
     public void delete(Long id);
+
+    public void update(Contact contact);
+
+    public SessionFactory getSessionFactory();
 }

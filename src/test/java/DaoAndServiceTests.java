@@ -15,21 +15,21 @@ import java.util.List;
 public class DaoAndServiceTests {
     @Test
     @SuppressWarnings("resource")
-    public void TestFindAllWithDetail(){
+    public void TestFindAllWithDetail() {
         ApplicationContext appContext = new ClassPathXmlApplicationContext("DaoServiceTestResources/test-spring-root-context.xml");
         ContactService service = (ContactService) appContext.getBean("contactService");
         List<Contact> resultset = service.findAllWithDetail();
-        for (Contact contact:resultset){
+        for (Contact contact : resultset) {
             System.out.println(contact.toString());
-            if (contact.getContactTelDetails()!=null){
+            if (contact.getContactTelDetails() != null) {
                 System.out.println("Contact telephones:");
-                for (ContactTelDetail contactTelDetail:contact.getContactTelDetails()){
+                for (ContactTelDetail contactTelDetail : contact.getContactTelDetails()) {
                     System.out.println(contactTelDetail);
                 }
             }
-            if (contact.getHobbies()!=null){
+            if (contact.getHobbies() != null) {
                 System.out.println("Hobbies:");
-                for (Hobby hobby:contact.getHobbies()){
+                for (Hobby hobby : contact.getHobbies()) {
                     System.out.println(hobby);
                 }
             }
@@ -41,9 +41,9 @@ public class DaoAndServiceTests {
     public void TestFindById() {
         ApplicationContext appContext = new ClassPathXmlApplicationContext("DaoServiceTestResources/test-spring-root-context.xml");
         ContactService service = (ContactService) appContext.getBean("contactService");
-        Long searchableId=1L;
+        Long searchableId = 4L;
         Contact contact = service.findById(searchableId);
-        System.out.println("Contact with id="+searchableId+" is "+contact.toString());
+        System.out.println("Contact with id=" + searchableId + " is " + contact.toString());
         if (contact.getContactTelDetails() != null) {
             System.out.println("Contact telephones:");
             for (ContactTelDetail contactTelDetail : contact.getContactTelDetails()) {
@@ -70,9 +70,38 @@ public class DaoAndServiceTests {
         contact.setBirthDate(new Date());
         ContactTelDetail contactTelDetail = new ContactTelDetail("Home", "11111111");
         contact.addContactTelDetail(contactTelDetail);
-        contactTelDetail=new ContactTelDetail("Mobile", "22222222");
+        contactTelDetail = new ContactTelDetail("Mobile", "22222222");
         contact.addContactTelDetail(contactTelDetail);
 
         service.save(contact);
+    }
+
+    @Test
+    @SuppressWarnings("resource")
+    public void TestFindByIdAndUpdateContact() {
+        ApplicationContext appContext = new ClassPathXmlApplicationContext("DaoServiceTestResources/test-spring-root-context.xml");
+        ContactService service = (ContactService) appContext.getBean("contactService");
+        Long searchableId = 4L;
+        Contact contact = service.findById(searchableId);
+        System.out.println(contact);
+        if (contact.getContactTelDetails() != null) {
+            System.out.println("Contact telephones:");
+            for (ContactTelDetail contactTelDetail : contact.getContactTelDetails()) {
+                System.out.println(contactTelDetail);
+            }
+        }
+        contact.setFirstName("Kim");
+        contact.setLastName("Wong");
+        ContactTelDetail toDelete = null;
+        for (ContactTelDetail contactTel : contact.getContactTelDetails()) {
+            if (contactTel.getTelType().equals("Home")) {
+                System.out.println(contactTel);
+                toDelete = contactTel;
+            }
+        }
+        if (toDelete != null) contact.removeContactTelDetail(toDelete);
+        service.getSessionFactory().openStatelessSession().update(contact);
+//        service.update(contact);
+        //*service.save(contact);
     }
 }

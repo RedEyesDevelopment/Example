@@ -110,6 +110,33 @@ public class Contact implements Serializable {
                 ", birthDate:" + birthDate +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Contact contact = (Contact) o;
+
+        if (getVersion() != contact.getVersion()) return false;
+        if (!getId().equals(contact.getId())) return false;
+        if (getFirstName() != null ? !getFirstName().equals(contact.getFirstName()) : contact.getFirstName() != null)
+            return false;
+        if (getLastName() != null ? !getLastName().equals(contact.getLastName()) : contact.getLastName() != null)
+            return false;
+        return getBirthDate() != null ? getBirthDate().equals(contact.getBirthDate()) : contact.getBirthDate() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getVersion();
+        result = 31 * result + (getFirstName() != null ? getFirstName().hashCode() : 0);
+        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
+        result = 31 * result + (getBirthDate() != null ? getBirthDate().hashCode() : 0);
+        return result;
+    }
 }
 
     

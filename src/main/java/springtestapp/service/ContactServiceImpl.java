@@ -2,6 +2,7 @@ package springtestapp.service;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +39,16 @@ public class ContactServiceImpl implements ContactService {
     @Transactional
     public void delete(Long id) {
         contactDAO.delete(id);
+    }
+
+    @Transactional
+    public void update(Contact contact) {
+        contactDAO.update(contact);
+    }
+
+    @Transactional
+    public SessionFactory getSessionFactory(){
+        return contactDAO.getSessionFactory();
     }
 
     @Transactional(readOnly = true)
