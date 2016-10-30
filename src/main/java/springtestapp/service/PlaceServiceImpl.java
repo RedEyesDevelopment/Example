@@ -1,12 +1,12 @@
-package springapp.service;
+package springtestapp.service;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import springapp.dao.PlaceDAO;
-import springapp.model.Place;
+import springtestapp.dao.PlaceDAO;
+import springtestapp.model.Place;
 
 import java.util.List;
 

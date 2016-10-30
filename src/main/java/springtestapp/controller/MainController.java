@@ -1,4 +1,4 @@
-package springapp.controller;
+package springtestapp.controller;
 
 /**
  * Created by Gvozd on 29.03.2016.
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import springapp.model.Place;
-import springapp.service.PlaceService;
+import springtestapp.model.Place;
+import springtestapp.service.PlaceService;
 
 import java.util.Map;
 

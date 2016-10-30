@@ -1,4 +1,4 @@
-package springapp.model;
+package springtestapp.model;
 
 import javax.persistence.*;
 
