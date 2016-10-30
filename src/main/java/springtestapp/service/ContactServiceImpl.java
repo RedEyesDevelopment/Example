@@ -40,9 +40,8 @@ public class ContactServiceImpl implements ContactService {
         contactDAO.delete(id);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Contact findById(Long id) {
-        logger.info("service impl - place traded to controller!");
         return contactDAO.findById(id);
     }
 }

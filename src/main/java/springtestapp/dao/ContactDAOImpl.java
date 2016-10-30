@@ -50,13 +50,8 @@ public class ContactDAOImpl implements ContactDAO {
         }
     }
 
+    @SuppressWarnings("unchecked")   
     public Contact findById(Long id) {
-        Contact resultcontact = new Contact();
-        try {
-            resultcontact = (Contact) sessionFactory.getCurrentSession().load(Contact.class, id);
-        } catch (Exception e) {
-            resultcontact = null;
-        }
-        return resultcontact;
+        return (Contact) sessionFactory.openSession().getNamedQuery("Contact.findById").setParameter("id", id).uniqueResult();
     }
 }
